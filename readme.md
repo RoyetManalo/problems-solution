@@ -1,0 +1,1 @@
+#So I decided that I need to document every problem that I will encounter in my software engineering career, so it can help me in the future
