@@ -1,0 +1,73 @@
+Error- BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters
+Full Error Message: 
+C:\Users\Kerby\Desktop\Queue-Mobile\node_modules\bson\lib\error.js:41
+        var _this = _super.call(this, message) || this;
+                           ^
+
+BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters
+    at new BSONTypeError (C:\Users\Kerby\Desktop\Queue-Mobile\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\Kerby\Desktop\Queue-Mobile\node_modules\bson\lib\objectid.js:65:23)
+    at C:\Users\Kerby\Desktop\Queue-Mobile\server\routes\api\vaccine.js:31:35
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+Cause: The updateVaccineBrandID in data object on Vaccine.vue (view) becomes undefined after 1 successfull update/
+Because the <option> value becomes undefined on re-render/ 
+On submit the "_id" becomes "id" so the :value: vaccine._id becomes invalid and naturally html will set it to undefined
+In setting the updVaccine in the store index.js
+code:    
+const updatedVaccine = {
+        // this is the problem
+        _id: updVaccine.id,
+        vaccineBrand: updVaccine.vaccineBrand,
+        vials: res.data.vaccine.vials,
+      };
+:
+is set the "_id" as "id"
+this cause the vaccines array _id property to change as id
+
+Solution:
+change the "id" to "_id" in store index.js updateVaccine actions object.
+
+I use watch property to see the value of the id on changes
+  watch: {
+    updateVaccineBrandID(newValue, oldValue) {
+      console.log("old:" + oldValue);
+      console.log("new:" + newValue);
+      if (newValue == undefined) {
+        this.vaccines.forEach((vaccine) => console.log(vaccine));
+      }
+    },
+  },
+
+
+
+Problem: The Vaccine state doesnt update with _id
+
+
+Problem: How to delete multiple data in mongodb and in an array
+
+Solution:
+In the Server   await queues.deleteMany({ _id: { $in: usersDelete } });// code
+use the $in for putting multiple id in the deleteMany methods
+
+then
+get all the ids of the deleted data and map through it to return all the indexes of the id
+ const indexes = IDS.map((id) => {
+        return state.peopleInQueue.findIndex((person) => person._id === id);
+      });
+
+then loop through all the indexes and splice each index
+ indexes.forEach((index) => {
+        if (index !== -1) {
+          state.peopleInQueue.splice(index, 1);
+        }
+      });
+
+Problem: QR Code not loading on production
+
+Solution: Put all the generated qr code in the server folder then use that folder as a static folder
+then make a get request to get the qrcode image, then convert the response to a new window url 
+then set the url to the img real url
+code: 
+const url = window.URL.createObjectURL(new Blob([data]));
+this.img = url

@@ -1,0 +1,7 @@
+Problem: I can't find a solution on how to create a coooldown on each button.
+
+Initial idea: 
+My first idea is to grab what element was clicked using event.target, then disabled it using element.disabled, then create a
+setTimeout for 30 secs and enabled the element after 30 secs. It works but i dont know if its the best solution. I try to add
+some cooldown number that countdown every second, it works but every button has the same cooldown value because it came from the data
+function in vue. So I was thinking that I need to use a scoped variable, but It will not be reactive.

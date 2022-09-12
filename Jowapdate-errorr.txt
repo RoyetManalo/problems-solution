@@ -1,0 +1,6 @@
+Problem: I cant connect to devices using given code
+
+Initial Idea:
+my first idea is to use websocket and create a room when a user register and it will generate code from the backend, 
+then when the other user register and also generate code, it will create its own room. Then when they decided to connect to each other,
+the other user will leave the room and join the other user. 
