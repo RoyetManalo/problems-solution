@@ -5,3 +5,14 @@ My first idea is to grab what element was clicked using event.target, then disab
 setTimeout for 30 secs and enabled the element after 30 secs. It works but i dont know if its the best solution. I try to add
 some cooldown number that countdown every second, it works but every button has the same cooldown value because it came from the data
 function in vue. So I was thinking that I need to use a scoped variable, but It will not be reactive.
+
+
+Problem: Cannot set headers after they are sent to the client
+
+
+Problem: Button does not cooldown
+Reason: I've used event.target then when I click on the icon or text it doesnt work
+
+Solution: After the data got fetch from the server add 2 properties for each object of the attack monster. Add the ff. properties
+isDisabled: false, cd: 30. You can use the isDisabled properties to set the :disabled property of a button and then use the cd 
+property to create a countdown of a cooldown every second. After the cd value becomes 0. just reset it the its original value
