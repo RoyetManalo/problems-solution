@@ -1,0 +1,40 @@
+MEVN
+
+1. create droplet
+2. login using the credentials using ssh
+	ssh IP_ADDRESS -l root / root@IP_ADDRESS
+3. Update our packages
+	sudo apt update
+4. Install NODEJS
+	grab the repo
+	curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+	sudo apt install nodejs
+5. create apps folder
+	mkdir apps
+	cd apps
+6. clone the code from github
+	git clone LINK
+7. go to dir
+	cd minigame
+8. install all packages
+	npm install
+9. install pm2
+	npm i -g pm2
+10. run the server on the background
+	pm2 start server/index.js
+11. config to run when server is rebooted
+	pm2 startup ubuntu
+12. enabling the firewall
+	ufw enable
+	ufw allow ssh
+13. allow port 80 and port 443
+	ufw allow http
+	ufw allow https
+14. set up nginx
+	sudo apt install nginx
+15. edit the default file
+	sudo nano /etc/nginx/sites-available/default
+16. check if config file is ok
+	sudo nginx -t
+17, restart the service
+	sudo service nginx restart
